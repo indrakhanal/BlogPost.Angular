@@ -1,0 +1,134 @@
+<div class="container">
+    <h1 class="mt-3">Edit/Delete BlogPost</h1>
+    <ng-container *ngIf="singleBlogObj; else notFound">
+    
+        <form #form="ngForm" (ngSubmit)="onFormSumbit()">
+            <div class="mt-2 mb-5">
+                <div class=" mt-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input
+                        type="text"
+                        id="title"
+                        name="title"
+                        class="form-control"
+                        [(ngModel)]="singleBlogObj.title"
+                    >
+                </div>
+    
+                <div class=" mt-3">
+                    <label for="title" class="form-label">Url Handler</label>
+                    <input
+                        type="text"
+                        id="urlHandler"
+                        name="urlHandler"
+                        class="form-control"
+                        [(ngModel)]="singleBlogObj.urlHandlerget"
+    
+                    >
+                </div>
+    
+                <div class=" mt-3">
+                    <label for="shortDescription" class="form-label">Short Description</label>
+                    <input
+                        type="text"
+                        id="shortDescription"
+                        name="shortDescription"
+                        class="form-control"
+                        [(ngModel)]="singleBlogObj.shortDescription"
+    
+                    >
+                </div>
+    
+                <div class=" mt-3">
+                    <label for="content" class="form-label">Content</label>
+                    <!-- <textarea
+                        id="content"
+                        name="content"
+                        class="form-control"
+                        [(ngModel)]="singleBlogObj.content"
+                    ></textarea> -->
+                    <div class="NgxEditor__Wrapper">
+                        <ngx-editor-menu [editor]="editor"></ngx-editor-menu>
+                        <ngx-editor
+                        [editor]="editor"
+                        [(ngModel)]="singleBlogObj.content"
+                        [disabled]="false"
+                        [placeholder]="'Type here...'"
+                        id="content"
+                        name="content">
+                        </ngx-editor>
+                      </div>
+                </div>
+    
+                <div class=" mt-3">
+                    <label for="featureImageUrl" class="form-label">Feature Image Url</label>
+                    <ng-container *ngIf="singleBlogObj.featureImageUrl !== ''" >
+                    <div>
+                        <img [src]="singleBlogObj.featureImageUrl" height="100" class="my-2">
+                    </div>
+                    </ng-container>
+                    <input
+                        type="text"
+                        id="featureImageUrl"
+                        name="featureImageUrl"
+                        class="form-control"
+                        [(ngModel)]="singleBlogObj.featureImageUrl"
+                    >
+                </div>
+    
+                <div class=" mt-3">
+                    <label for="publishedDate" class="form-label">Published Date</label>
+                    <input
+                        type="date"
+                        id="publishedDate"
+                        name="publishedDate"
+                        class="form-control"
+                        value="{{singleBlogObj.publishedDate}}"
+                        [ngModel]="singleBlogObj.publishedDate | date:'yyy-MM-dd'"
+                        (ngModelChange)="singleBlogObj.publishedDate = $event"
+                    >
+                </div>
+    
+                <div class=" mt-3">
+                    <label for="author" class="form-label">Author</label>
+                    <input
+                        type="text"
+                        id="author"
+                        name="author"
+                        class="form-control"
+                        [(ngModel)]="singleBlogObj.author"
+                    >
+                </div>
+                <div class="mt-3">
+                    <label for="categories" class="form-label">Categories</label>
+                    <ng-container *ngIf="categories$ | async as categories">
+                        <select class="form-control" name="categories" multiple [(ngModel)]="selectedBlog">
+                            <option *ngFor="let item of categories" [value]="item.id">
+                            {{item.name}}
+                            </option>
+                        </select>
+                    </ng-container>
+                </div>
+                <div class="mt-3">
+                    <label for="isVisible" class="form-label">Is Visible</label>
+                    <input 
+                        id="isVisible" 
+                        name="isVisible" 
+                        class="form-check-input ms-2 mt-1" 
+                        type="checkbox" 
+                        [(ngModel)]="singleBlogObj.isVisible"
+                        >
+                </div>
+                <div class="mt-3 mb-3">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-danger ms-3" (click)="onDelete()">Delete</button>
+                </div>
+            </div>
+        </form>
+    </ng-container>
+    <ng-template #notFound>
+        <div class="alert alert-warning" role="alert">
+            Blog Not Found!
+        </div>
+    </ng-template>
+</div>

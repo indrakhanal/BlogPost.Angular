@@ -1,0 +1,47 @@
+<ng-container *ngIf="$blogdetail | async as blogPost; else loader">
+<div class="container">
+    <div class="py-5">
+        <div class="row justify-content-md-center">
+            <div class="col col-lg-8 mx-auto">
+                <img [src]="blogPost.featureImageUrl" [title]="blogPost.title" class="img-fluid">
+                <h1 class="mt-4">{{blogPost.title}}</h1>
+                <div class="d-flex justify-content-between mt-4">
+                    <span>{{blogPost.author}}</span>
+                    <span>{{blogPost.publishedDate | date:'dd-MM-yyyy'}}</span>
+                </div>
+                <div *ngIf="blogPost.categories" class="mt-4">
+                  <span class="badge bg-secondary me-2" *ngFor="let cat of blogPost.categories">
+                        {{cat.name}}
+                   </span>
+                </div>
+                <div class="mt-4 blog-content">
+                    <p [innerHTML]="blogPost.content"></p>
+                </div>
+            </div>
+            
+            <div class="col-md-auto" *ngIf="$blogpostList |async as postList; else loader">
+                <ul class="list-group">
+                    <ol type="1">
+                        <h4 class="p-2">Blog List</h4>
+                        <li class="list-group-item" *ngFor="let blog of postList">
+                            <ng-container *ngIf="blog.urlHandlerget === url; else nonSelected">
+                                <a (click)="getDetailPost()" [routerLink]="['/blog', blog.urlHandlerget]" style="color: blue; text-decoration: none;">{{(blog.title.length>30)? (blog.title| slice:0:30)+'...':(blog.title) }}</a>
+                            </ng-container>
+                            <ng-template #nonSelected>
+                                <a (click)="getDetailPost()" [routerLink]="['/blog', blog.urlHandlerget]" style="color:black; text-decoration:none;">{{(blog.title.length>30)? (blog.title| slice:0:30)+'...':(blog.title) }}</a>
+                            </ng-template>
+                        </li>
+                    </ol>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+</ng-container>
+<ng-template #loader>
+    <div class="text-center mt-5">
+        <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    </div>
+</ng-template>
