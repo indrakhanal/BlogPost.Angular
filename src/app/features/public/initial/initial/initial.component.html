@@ -1,0 +1,25 @@
+
+<div *ngIf="isShowing" class="modal fade show" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" style="display: block; padding: 0px;" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5 justify-content-center" id="exampleModalLabel">Choose Portal</h1>
+      </div>
+      <div class="modal-body">
+        <div class="col ps-5 p-1 d-flex">
+            <div class="mb-3 me-4">
+             <a class="btn btn-danger" [routerLink]="['/blog']">Blog Page</a>
+            </div>
+            <div class="mb-3">
+              <a class="btn btn-danger" [routerLink]="['/visualization-d3']">Visualization of Data</a>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <div class="mb-3">
+            <!-- some text if needed -->
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
