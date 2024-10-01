@@ -11,11 +11,21 @@ import { BlogDetailComponent } from './features/public/blog-detail/blog-detail.c
 import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component';
 import { authGuard } from './features/auth/guards/auth.guard';
+import { InitialComponent } from './features/public/initial/initial/initial.component';
+import { VisualizationComponent } from './features/public/visualizationd3/visualization/visualization.component';
 
 const routes: Routes = [
   {
     path:'',
+    component:InitialComponent
+  },
+  {
+    path:'blog',
     component:HomeComponent
+  },
+  {
+    path:'visualization-d3',
+    component:VisualizationComponent
   },
   {
     path:'blog/:url',

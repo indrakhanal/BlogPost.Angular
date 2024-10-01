@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment.development';
 import { User } from '../models/user.model';
 import { CookieService } from 'ngx-cookie-service';
 import { RegisterRequest } from '../models/register-request.models';
+import { SearchBlogPosts } from 'src/app/core/models/blog-search.models';
 
 @Injectable({
   providedIn: 'root'
@@ -58,5 +59,9 @@ export class AuthService {
     localStorage.clear();
     this.cookieServices.delete('Authorization', '/')
     this.$user.next(undefined);
+  }
+
+  searchBlog(value:string):Observable<SearchBlogPosts[]>{
+    return this.http.get<SearchBlogPosts[]>(`${environment.apiBaseUrl}/api/BlogPost/search?value=${value}`)
   }
 }

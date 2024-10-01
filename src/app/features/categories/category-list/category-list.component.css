@@ -1,0 +1,12 @@
+.icon-custom{
+    border: 2px solid black;
+    border-radius: 5px;
+    padding: 1px;
+}
+.pegination-custom{
+    background-color: blueviolet;
+    color: black;
+}
+.pointer-class>li>a{
+    cursor: pointer;
+}

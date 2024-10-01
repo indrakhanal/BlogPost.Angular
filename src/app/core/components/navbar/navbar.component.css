@@ -1,0 +1,13 @@
+.cont-custom{
+    z-index: 999;
+    position: absolute;
+}
+.hover-item:hover{
+    background-color: rgb(104, 104, 227);
+}
+.search-custom{
+    border-radius: 5px;
+    box-sizing: border-box; 
+    border: 1px solid #dee2e6;
+    background-color: #fff;
+}

@@ -18,6 +18,8 @@ import { LoginComponent } from './features/auth/login/login.component';
 import { RegisterComponent } from './features/auth/register/register.component'
 import { AuthInterceptor } from './core/interceptor/auth.interceptor';
 import { NgxEditorModule } from 'ngx-editor';
+import { VisualizationComponent } from './features/public/visualizationd3/visualization/visualization.component';
+import { InitialComponent } from './features/public/initial/initial/initial.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { NgxEditorModule } from 'ngx-editor';
     HomeComponent,
     BlogDetailComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    VisualizationComponent,
+    InitialComponent
   ],
   imports: [
     BrowserModule,

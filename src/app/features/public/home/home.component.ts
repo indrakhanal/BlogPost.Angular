@@ -10,10 +10,21 @@ import { BlogPosts } from '../../blog-post/models/get-blog-post.model.request';
 })
 export class HomeComponent implements OnInit{
   blogs$?:Observable<BlogPosts[]>
+  loadBlogs$?:Observable<BlogPosts[]>
+  blogsize=6
+  isClicked= false
   constructor(private blogpostService:BlogpostService){}
 
   ngOnInit(): void {
-    this.blogs$ = this.blogpostService.getAllPost();
+    this.blogs$ = this.blogpostService.getAllPost(undefined, undefined, this.blogsize, true);
   }
-
+  loadBlogs():void{
+    this.isClicked = true
+    var context = this;
+    context.blogsize+=3;
+    setTimeout(function(){
+      context.loadBlogs$ = context.blogpostService.getAllPost(undefined, undefined, context.blogsize, true);
+      context.isClicked = false
+    },2000);
+  }
 }

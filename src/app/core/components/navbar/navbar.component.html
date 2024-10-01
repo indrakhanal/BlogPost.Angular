@@ -1,15 +1,22 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar shadow navbar-expand-lg bg-body-tertiary">
     <div class="container">
-      <a class="navbar-brand" href="#">Blog Post</a>
+      <a class="navbar-brand" href="#"><i class="bi bi-toggles2"></i></a>
+      <a *ngIf="$isVisualization != true;else visualization" class="navbar-brand">Blog Post</a>
+      <ng-template #visualization>
+        <a class="navbar-brand">Data Visualization</a>
+      </ng-template>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a *ngIf="$isVisualization != true;else visualizationHome" class="nav-link active" aria-current="page" [routerLink]="['/blog']">Home</a>
+            <ng-template #visualizationHome>
+                <a class="nav-link active" aria-current="page" [routerLink]="['/visualization-d3']">Home</a>
+            </ng-template>
           </li>
-          <ng-container *ngIf="user !== undefined && user?.roles?.includes('Writer')">
+          <ng-container *ngIf="user !== undefined && user?.roles?.includes('Writer') && $isVisualization != true">
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                 Admin
@@ -21,6 +28,10 @@
             </li>
           </ng-container>
         </ul>
+        <div *ngIf="$isVisualization != true" class="d-flex navbar-nav me-auto mb-2 mb-lg-0">
+          <img src="../../../../assets/img/search.png" width="36px" height="36px" class="search-custom">
+          <input [(ngModel)]="query" (input)="onQueryChange()" class="form-control" id="blog" placeholder="Search Blogs...">
+        </div>
         <div class="d-flex">
           <ng-container *ngIf="user===undefined; else ShowLogout">
             <a [routerLink]="['/login']" class="btn btn-primary">Login</a>
@@ -35,3 +46,20 @@
       </div>
     </div>
   </nav>
+
+<div class="container cont-custom" *ngIf="suggestions.length">
+  <div class="row">
+    <div class="col-md-5"></div>
+      <div class="col-md-4 shadow p-3 mb-3 bg-white rounded">
+        <ul class="list-group me-2 mb-2">
+            <h4 class="p-2">Search Results</h4>
+            <ng-container>
+              <li class="list-group-item hover-item" *ngFor="let blog of suggestions">
+                  <a (click)="getDetailPostSearch('blog/'+blog.urlHandlerget)" [routerLink]="['/blog', blog.urlHandlerget]" style="text-decoration: none; color: black;">{{(blog.title.length>40)? (blog.title| slice:0:40)+'...':(blog.title) }}</a>
+              </li>
+            </ng-container>
+        </ul>
+      </div>
+      <div class="col-md-3"></div>
+  </div>
+</div>

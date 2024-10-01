@@ -42,7 +42,6 @@ export class AddBlogpostComponent implements OnInit, OnDestroy {
     this.categories$ = this.categoryServices.getCategory();
   }
   onFormSumbit():void{
-    console.log(this.model, "=====")
     this.addBlogPostSubscription = this.blogPostServices.addBlogPost(this.model).subscribe({
       next:(res) =>{
         console.log(res)
