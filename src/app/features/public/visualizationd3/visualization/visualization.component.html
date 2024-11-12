@@ -1,2 +1,30 @@
-<p>visualization works!</p>
-
+<div class="container">
+    <h4>D3 Visualization Chart</h4>
+    <hr/>
+    <div class="col">
+        <div class="row">
+            <div class="col col-md-5 d-flex">
+                <select name="d3-v" class="form-select" (change)="showVisualizationOfData($event)">
+                    <optgroup>
+                        <option value="pie">Pie Chart</option>
+                        <option value="bar">Bar Graph</option>
+                        <option value="line">Line Graph</option>
+                    </optgroup>
+                </select>
+            </div>
+        </div>
+        <div class="col d-flex p-3">
+            <!-- <span *ngIf="status">{{status}}</span> -->
+            <div class="col col-md-2"></div>
+            <div class="col col-md-4 justify-content-center">
+                <div *ngIf="isClicked === true" class="mt-1 ms-4">
+                    <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <figure class="figure-img" id="pie"></figure>
+        <figure class="figure-img" id="bar"></figure>
+    </div>
+</div>
